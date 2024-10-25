@@ -1,0 +1,67 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.departpage {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: 25px;
+}
+.clinic {
+  position: relative;
+  top: -65px;
+  font-size: 45px;
+}
+.wore {
+  opacity: 0.8;
+}
+.departimage {
+  height: 550px;
+}
+.dbt {
+  width: 200px;
+  height: 40px;
+  color: rgb(255, 255, 255);
+  border: 1px solid rgb(183, 183, 183);
+  border-radius: 10px;
+  background-color: #000000;
+  transition: all 0.3s;
+}
+.dbt:hover {
+  cursor: pointer;
+  color: white;
+  background-color: #2a93c9;
+}
+
+.departpage2 {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 25px;
+}
+.clinic2 {
+  position: relative;
+  top: -65px;
+  font-size: 45px;
+}
+.wore2 {
+  opacity: 0.8;
+}
+.departimage2 {
+  height: 550px;
+}
+.dbt2 {
+  width: 200px;
+  height: 40px;
+  color: rgb(255, 255, 255);
+  border: 1px solid rgb(183, 183, 183);
+  border-radius: 10px;
+  background-color: #000000;
+  transition: all 0.3s;
+}
+.dbt2:hover {
+  cursor: pointer;
+  color: white;
+  background-color: #2a93c9;
+}

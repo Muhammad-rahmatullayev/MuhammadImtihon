@@ -1,0 +1,92 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.video-container {
+  display: flex;
+  justify-content: center;
+  padding: 170px;
+  gap: 20px;
+}
+.video {
+  width: 300px;
+  height: 190px;
+  border: 5px solid transparent;
+  transition: border-color 0.3s;
+  border-radius: 10px;
+}
+.video-container .video:hover {
+  border-color: rgb(56, 56, 56);
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.229);
+}
+.video-container .video:hover {
+  animation: playVideo 1s forwards;
+}
+@keyframes playVideo {
+  from {
+    border-color: transparent;
+  }
+  to {
+    border-color: rgb(0, 0, 0);
+  }
+}
+
+.video:not(:hover) {
+  animation: pauseVideo 1s forwards;
+}
+
+@keyframes pauseVideo {
+  from {
+    border-color: rgb(126, 126, 126);
+  }
+  to {
+    border-color: transparent;
+  }
+}
+
+.video {
+  position: relative;
+}
+
+.video:hover {
+  animation: playVideo 1s forwards;
+}
+
+.video:not(:hover) {
+  animation: pauseVideo 1s forwards;
+}
+
+.video {
+  display: block;
+}
+@media(max-width:1290px){
+  .video{
+    transition: all 2s;
+    width: 270px;
+  }
+}
+@media(max-width:1175px){
+  .video{
+    transition: all 2s;
+    width: 250px;
+  }
+}
+@media(max-width:1090px){
+  .video{
+    transition: all 2s;
+    width: 200px;
+  }
+}
+@media(max-width:890px){
+  .video{
+    transition: all 2s;
+    width: 150px;
+  }
+}
+@media(max-width:690px){
+  .video{
+    display: none;
+  }
+}

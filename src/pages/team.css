@@ -1,0 +1,141 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.swiper {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  overflow: hidden;
+  border: 0px;
+}
+
+.swiper-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 1s ease-in-out;
+}
+
+.swiper-buttons {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+}
+
+.swiper-buttons button {
+  padding: 10px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+}
+
+.swiper-buttons button.active {
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+}
+
+.teampage2 {
+  display: flex;
+  align-items: center;
+  padding: 40px 50px;
+  justify-content: center;
+  gap: 20px;
+  color: rgb(0, 0, 0);
+  background-color: aliceblue;
+}
+
+.kl {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+.sertifikat {
+  width: 130px;
+  box-shadow: 0px 0px 10px;
+  cursor: pointer;
+}
+.teampage3 {
+  width: 100%;
+  height: 70%;
+}
+
+.skills-container {
+  width: 60%;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.skill {
+  margin-bottom: 20px;
+}
+
+.skill-name {
+  font-weight: bold;
+}
+
+.skill-bar {
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  position: relative;
+  height: 25px;
+  width: 100%;
+}
+
+.skill-percentage {
+  background-color: #76c7c0;
+  height: 100%;
+  text-align: right;
+  padding-right: 10px;
+  line-height: 25px;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+}
+
+.three-divs-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.div-box {
+  background-color: #f4f4f43a;
+  padding: 20px;
+  border: 1px solid #cccccc1c;
+  width: 30%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.top-section {
+  display: flex;
+  align-items: center;
+}
+
+.small-image {
+  width: 50px;
+  height: 50px;
+  margin-right: 15px;
+}
+
+h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+p {
+  margin: 0;
+}
+
+.number {
+  display: block;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.bottom-section {
+  margin-top: 20px;
+}
