@@ -146,7 +146,8 @@ function Magazine() {
           <span className="wordab">Magazine</span>
         </div>
       </div>
-      <div>
+      <div><br />
+      <br />
         <div className="product-collection">
           <h1>Drugs and Medical items for sale</h1>
           <br />
@@ -173,7 +174,7 @@ function Magazine() {
             <span>{cart.length} ta buyum</span>
           </div>
         </div>
-      </div>
+      </div><br /><br /><br />
     </div>
   );
 }

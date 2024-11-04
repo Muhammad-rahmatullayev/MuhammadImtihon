@@ -26,56 +26,7 @@ function team() {
       text: "Aliquam risus urna, posuere in diam nec, eleifend\nbibendum metus. Etiam scelerisque dui id erat facilisis,\naccumsan.",
     },
   ];
-  const boxes = [
-    {
-      id: 1,
-      img: "/user1.jpg",
-      text: "Dr.ANNA HEITHWAY:EKG Technician",
-      url: "/page1",
-    },
-    {
-      id: 2,
-      img: "/user8.jpg",
-      text: "Dr.MARY SMITH:Phlebotomist",
-      url: "/page2",
-    },
-    {
-      id: 3,
-      img: "/user5.jpg",
-      text: "Dr.JANE FOWLER:Clinical Laboratory Technologist",
-      url: "/page3",
-    },
-    {
-      id: 4,
-      img: "/user4.jpg",
-      text: "SAM MACCALLIN:Histotechnologist",
-      url: "/page4",
-    },
-    {
-      id: 5,
-      img: "/user5.jpg",
-      text: "Dr.JANE FOWLER:Clinical Laboratory Technologist",
-      url: "/page5",
-    },
-    {
-      id: 6,
-      img: "/user6.jpg",
-      text: "Dr.SCOTT RILEY:Chief Medical Officer, Pathologist",
-      url: "/page6",
-    },
-    {
-      id: 7,
-      img: "/user7.jpg",
-      text: "ERIC SNYDER:MRI Technologist",
-      url: "/page7",
-    },
-    {
-      id: 8,
-      img: "/user8.jpg",
-      text: "Dr.MARY SMITH:Phlebotomist",
-      url: "/page8",
-    },
-  ];
+
   const images = [
     "/public/swipeimage1.jpg",
     "/public/swipeimage2.jpg",
@@ -110,10 +61,95 @@ function team() {
   const goToSlide = (index) => {
     setCurrentImageIndex(index);
   };
-  const [isHovered, setIsHovered] = useState(false);
 
-  const handleMouseEnter = () => setIsHovered(true);
-  const handleMouseLeave = () => setIsHovered(false);
+  const [modal, setModal] = useState(null);
+
+  const boxes = [
+    {
+      id: 1,
+      img: "/public/user1.jpg",
+      title: "Dr. Sam McMillan",
+      modalImg: "/public/user1.jpg",
+      modalTitle: "THERAPY",
+      modalText:
+        "This is the description for Box 1. Here is some more detail about this box.Aenean ac ex nunc. Phasellus tincidunt tempus enim. Sed elementum volutpat libero at pellentesque. Vestibulum interdum, dolor eget tristique dignissim, augue diam viverra ex, non malesuada ipsum mauris volutpat nibh. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam efficitur accumsan condimentum.",
+    },
+    {
+      id: 2,
+      img: "/public/user2.jpg",
+      title: "Dr.Rina Rone",
+      modalImg: "/public/user2.jpg",
+      modalTitle: "SURGERY",
+      modalText:
+        "This is the description for Box 2. Here is some more detail about this box.Aenean ac ex nunc. Phasellus tincidunt tempus enim. Sed elementum volutpat libero at pellentesque. Vestibulum interdum, dolor eget tristique dignissim, augue diam viverra ex, non malesuada ipsum mauris volutpat nibh. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam efficitur accumsan condimentum.",
+    },
+    {
+      id: 3,
+      img: "user3.jpg",
+      title: "Dr.Sonya Blaze",
+      modalImg: "user3.jpg",
+      modalTitle: "PEDIATRICS",
+      modalText:
+        "This is the description for Box 3. Here is some more detail about this box.Aenean ac ex nunc. Phasellus tincidunt tempus enim. Sed elementum volutpat libero at pellentesque. Vestibulum interdum, dolor eget tristique dignissim, augue diam viverra ex, non malesuada ipsum mauris volutpat nibh. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam efficitur accumsan condimentum.",
+    },
+    {
+      id: 4,
+      img: "user4.jpg",
+      title: "Dr.Lola Fae",
+      modalImg: "user4.jpg",
+      modalTitle: "PEDIATRICS",
+      modalText:
+        "This is the description for Box 4. Here is some more detail about this box.Aenean ac ex nunc. Phasellus tincidunt tempus enim. Sed elementum volutpat libero at pellentesque. Vestibulum interdum, dolor eget tristique dignissim, augue diam viverra ex, non malesuada ipsum mauris volutpat nibh. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam efficitur accumsan condimentum.",
+    },
+    {
+      id: 5,
+      img: "user5.jpg",
+      title: "Dr.Jhon Toms",
+      modalImg: "user5.jpg",
+      modalTitle: "CARDIOLOGY",
+      modalText:
+        "This is the description for Box 5. Here is some more detail about this box.Aenean ac ex nunc. Phasellus tincidunt tempus enim. Sed elementum volutpat libero at pellentesque. Vestibulum interdum, dolor eget tristique dignissim, augue diam viverra ex, non malesuada ipsum mauris volutpat nibh. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam efficitur accumsan condimentum.",
+    },
+    {
+      id: 6,
+      img: "user6.jpg",
+      title: "Dr.Sam Collin",
+      modalImg: "user6.jpg",
+      modalTitle: "NEVROLOGUES",
+      modalText:
+        "This is the description for Box 6. Here is some more detail about this box.Aenean ac ex nunc. Phasellus tincidunt tempus enim. Sed elementum volutpat libero at pellentesque. Vestibulum interdum, dolor eget tristique dignissim, augue diam viverra ex, non malesuada ipsum mauris volutpat nibh. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam efficitur accumsan condimentum.",
+    },
+    {
+      id: 7,
+      img: "user7.jpg",
+      title: "Dr.Samantha Larusso ",
+      modalImg: "user7.jpg",
+      modalTitle: "CARDIOLOGY",
+      modalText:
+        "This is the description for Box 7. Here is some more detail about this box.Aenean ac ex nunc. Phasellus tincidunt tempus enim. Sed elementum volutpat libero at pellentesque. Vestibulum interdum, dolor eget tristique dignissim, augue diam viverra ex, non malesuada ipsum mauris volutpat nibh. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam efficitur accumsan condimentum.",
+    },
+    {
+      id: 8,
+      img: "user8.jpg",
+      title: "Dr.Jhon Adam",
+      modalImg: "user8.jpg",
+      modalTitle: "NEVROLOGUES",
+      modalText:
+        "This is the description for Box 8. Here is some more detail about this box.Aenean ac ex nunc. Phasellus tincidunt tempus enim. Sed elementum volutpat libero at pellentesque. Vestibulum interdum, dolor eget tristique dignissim, augue diam viverra ex, non malesuada ipsum mauris volutpat nibh. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam efficitur accumsan condimentum.",
+    },
+    {
+      id: 9,
+      img: "user5.jpg",
+      title: "Dr.Jhon Toms      ",
+      modalImg: "user5.jpg",
+      modalTitle: "CARDEOLOGY",
+      modalText:
+        "This is the description for Box 9. Here is some more detail about this box.Aenean ac ex nunc. Phasellus tincidunt tempus enim. Sed elementum volutpat libero at pellentesque. Vestibulum interdum, dolor eget tristique dignissim, augue diam viverra ex, non malesuada ipsum mauris volutpat nibh. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam efficitur accumsan condimentum.",
+    },
+  ];
+
+  const openModal = (box) => setModal(box);
+  const closeModal = () => setModal(null);
 
   return (
     <div className="teamcontainer">
@@ -137,32 +173,44 @@ function team() {
           <span className="wordab">TEAM</span>
         </div>
       </div>
-      <div className="swiper">
-        <img
-          src={images[currentImageIndex]}
-          alt="swiper image"
-          className="swiper-image"
-        />
-        <div className="swiper-buttons">
-          {images.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => goToSlide(index)}
-              className={currentImageIndex === index ? "active" : ""}
-            >
-              {index + 1}
-            </button>
-          ))}
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <div>
+        <div className="swiper">
+          <img
+            src={images[currentImageIndex]}
+            alt="swiper image"
+            className="swiper-image"
+          />
+          <div className="swiper-buttons">
+            {images.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => goToSlide(index)}
+                className={currentImageIndex === index ? "active" : ""}
+              >
+                {index + 1}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
       <div className="teampage2">
         <div className="kl">
           <div>
             <h1>SENIOR NURSE</h1>
             <br />
             <br />
-            <img style={{width:"120px"}} src="/public/user3.jpg" alt="" />
+            <img style={{ width: "120px" }} src="/public/user3.jpg" alt="" />
             <br />
             <br />
             <h2>Dr. Jane Fowler</h2>
@@ -277,24 +325,56 @@ function team() {
             </span>
           </div>
         </div>
-      </div><br /><br /><br /><br />
+      </div>
+      <br />
+      <br />
+      <br />
+      <br />
+
+      <div>
+        <div className="co">
+          <div>
+            <h1 style={{ fontSize: "45px" }}>OUR TEAM</h1>
+          </div>
+          <div className="grid">
+            {boxes.map((box) => (
+              <div key={box.id} className="boxy">
+                <div className="box-contentt">
+                  <img src={box.img} alt={box.title} className="boxo-image" />
+                  <h4>{box.title}</h4>
+                </div>
+                <button onClick={() => openModal(box)} className="modal-button">
+                  VIEW FULL PROFIL
+                </button>
+              </div>
+            ))}
+          </div>
+
+          {modal && (
+            <div className="modal">
+              <div className="modal-content">
+                <img
+                  src={modal.modalImg}
+                  alt={modal.modalTitle}
+                  className="modal-image"
+                />
+                <h2>{modal.modalTitle}</h2>
+                <p>{modal.modalText}</p>
+                <button onClick={closeModal} className="close-button">
+                  BACK
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
 
       <div className="teampage3">
-        <div className="boxx">
-          {boxes.map((boxxes) => (
-            <div key={boxxes.id} className="boxxes">
-              <img src={boxxes.img} alt={boxxes.text} />
-              <p>{boxxes.text}</p>
-              <button
-                className="btn"
-                onClick={() => handleButtonClick(boxxes.url)}
-              >
-                FULL PROFIL DEPARTAMENTS{boxxes.text}
-              </button>
-            </div>
-          ))}
-        </div>
-        <div><br /><br /><br /><br />
+        <div>
+          <br />
+          <br />
+          <br />
+          <br />
           <div className="three-divs-container">
             {data.map((item, index) => (
               <div className="div-box" key={index}>
@@ -320,6 +400,13 @@ function team() {
           </div>
         </div>
       </div>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
     </div>
   );
 }

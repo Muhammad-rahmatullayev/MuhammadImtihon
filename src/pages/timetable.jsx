@@ -1,6 +1,9 @@
 import "./timetable.css";
 import React, { useState, useEffect } from "react";
 
+
+
+
 function timetable() {
   const days = [
     "Monday",
@@ -39,6 +42,13 @@ function timetable() {
     { id: "doctor2", name: "Dr. Martha Schmidt", img: "/public/user1.jpg" },
     { id: "doctor3", name: "Dr. Scott Riley", img: "/public/user6.jpg" },
   ];
+  const [doctorss] = useState([
+    { name: 'Dr.Jhon Adam', workHours: ['Mon: 9am - 5pm', 'Tue: 9am - 5pm', 'Wed: 9am - 5pm', 'Thu: 9am - 5pm', 'Fri: 9am - 5pm'], offDays: ['Sat', 'Sun'] },
+    { name: 'Dr.Sonya Blaze', workHours: ['Mon: 10am - 6pm', 'Wed: 10am - 6pm', 'Fri: 10am - 6pm'], offDays: ['Tue', 'Thu', 'Sat', 'Sun'] },
+    { name: 'Dr.Jhon Toms', workHours: ['Mon: 8am - 4pm', 'Tue: 8am - 4pm', 'Fri: 8am - 4pm'], offDays: ['Wed', 'Thu', 'Sat', 'Sun'] },
+    { name: 'Dr.Lola Fae', workHours: ['Tue: 9am - 5pm', 'Thu: 9am - 5pm', 'Fri: 9am - 5pm'], offDays: ['Mon', 'Wed', 'Sat', 'Sun'] },
+    { name: 'Dr.Samantha Larusso', workHours: ['Mon: 11am - 7pm', 'Tue: 11am - 7pm', 'Thu: 11am - 7pm'], offDays: ['Wed', 'Fri', 'Sat', 'Sun'] },
+  ]);
 
   return (
     <div>
@@ -62,68 +72,41 @@ function timetable() {
           <span className="wordab">Timetable</span>
         </div>
       </div>
-
-      <div>
-        <div className="schedule-container">
-          <div className="schedule-grid">
-            <div className="schedule-days">
-              <div className="empty-cell"></div>
-              {days.map((day, index) => (
-                <div key={index} className="day-cell">
-                  {day}
-                </div>
-              ))}
-            </div>
-
-            {hours.map((hour, index) => (
-              <div key={index} className="hour-row">
-                <div className="hour-cell">{hour}</div>
-                {days.map((day, dayIndex) => (
-                  <div key={dayIndex} className="time-slot"></div>
-                ))}
-              </div>
-            ))}
-          </div>
-          <div className="respons1">
-            <img className="shki" src="/public/user6.jpg" alt="" />
-            <h1 style={{ fontSize: "15px", color: "white" }}>
-              Dr. Scott Riley{" "}
-            </h1>
-            <p style={{ fontSize: "10px", color: "white", padding: "10px" }}>
-              MRI Technologist
-            </p>
-          </div>
-          <div className="respons2">
-            <img className="shki" src="/public/user8.jpg" alt="" />
-            <h1 style={{ fontSize: "15px", color: "white" }}>
-              Dr. Jane Fowler
-            </h1>
-            <p style={{ fontSize: "10px", color: "white", padding: "10px" }}>
-              Clinical Laboratory Technologist
-            </p>
-          </div>
-
-          <div className="respons3">
-            <img className="shki" src="/public/user7.jpg" alt="" />
-            <h1 style={{ fontSize: "15px", color: "white" }}>
-              Dr. Eric Snyder
-            </h1>
-            <p style={{ fontSize: "10px", color: "white", padding: "10px" }}>
-              MRI Technologist
-            </p>
-          </div>
-          <div className="respons4">
-            <img className="shki" src="/public/user1.jpg" alt="" />
-            <h1 style={{ fontSize: "15px", color: "white" }}>
-              Dr. Martha Schmidt
-            </h1>
-            <p style={{ fontSize: "10px", color: "white", padding: "10px" }}>
-              ECG Technician
-            </p>
-          </div>
-        </div>
-      </div>
-
+<br /><br /><br /><br /><br />
+      <div className="doctor-schedule">
+      <h2>Doctors' Working Hours</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Doctors</th>
+            <th>Working Hours</th>
+            <th>Days Off</th>
+          </tr>
+        </thead>
+        <tbody>
+          {doctorss.map((doctor, index) => (
+            <tr key={index}>
+              <td>{doctor.name}</td>
+              <td>
+                <ul>
+                  {doctor.workHours.map((hour, i) => (
+                    <li key={i}>{hour}</li>
+                  ))}
+                </ul>
+              </td>
+              <td>
+                <ul>
+                  {doctor.offDays.map((day, i) => (
+                    <li key={i}>{day}</li>
+                  ))}
+                </ul>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+<br /><br /><br /><br /><br />
       <div>
         <div className="doctor-registration-container">
           {doctors.map((doctor) => (
@@ -132,7 +115,7 @@ function timetable() {
               <div className="doctor-info">
                 <h3>{doctor.name}</h3>
                 <form onSubmit={(e) => handleSubmit(e, doctor.id)}>
-                  <input
+                  <input className="timetableinput"
                     type="text"
                     placeholder="Your Name"
                     value={formData[doctor.id].name}
@@ -141,7 +124,7 @@ function timetable() {
                     }
                     required
                   />
-                  <input
+                  <input  className="timetableinput"
                     type="email"
                     placeholder="Your Email"
                     value={formData[doctor.id].email}
@@ -150,7 +133,7 @@ function timetable() {
                     }
                     required
                   />
-                  <input
+                  <input className="timetableinput"
                     type="date"
                     value={formData[doctor.id].date}
                     onChange={(e) =>
@@ -164,7 +147,7 @@ function timetable() {
             </div>
           ))}
         </div>
-      </div>
+      </div><br /><br /><br /><br />
     </div>
   );
 }

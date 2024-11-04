@@ -1,6 +1,23 @@
 import "./departaments.css";
 import React, { useState, useEffect } from "react";
+
+const images = [
+  { src: "/public/departslide1.jpg", text: "Health Insurance" },
+  { src: "/public/departslide2.jpg", text: "Side Effects" },
+  { src: "/public/departslide3.jpg", text: "Blood Pressure " },
+  { src: "/public/departslide4.jpg", text: "Physical Examination" },
+];
 function departments() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 3000); 
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div>
       <div className="abcont">
@@ -22,7 +39,7 @@ function departments() {
           </a>
           <span className="wordab">Departments</span>
         </div>
-      </div>
+      </div><br /><br /><br /><br /><br />
       <div className="departpage">
         <div>
           <h1 className="clinic">Clinical Laboratory</h1>
@@ -44,9 +61,6 @@ function departments() {
           </p>
           <br />
           <br />
-          <button className="dbt" onClick={() => handleButtonClick("Magazine")}>
-            LEARN MORE
-          </button>
         </div>
         <div>
           <img className="departimage" src="/public/depart1.jpg" alt="" />
@@ -79,42 +93,48 @@ function departments() {
           </p>
           <br />
           <br />
-          <button
-            className="dbt2"
-            onClick={() => handleButtonClick("Magazine")}
-          >
-            LEARN MORE
-          </button>
         </div>
       </div>
       <div className="departpage">
         <div>
-          <h1 className="clinic">Nuclear Medicine &Radiology</h1>
+          <h1 className="clinic">Nuclear Medicine </h1>
           <p className="wore">
             Sed rutrum, mi sit amet fringilla feugiat, nunc magna ullamcorper
-            lectus,
           </p>
           <p className="wore"> lectusn ac congue nisi est ac orci.</p>
           <br />
           <p className="wore">
-            ac congue nisi est ac orci. Integer posuere scelerisque efficitur.
-            Curabitur
+            Curabitur ultrices, nunc eu maximus tristique, purus ex ullamcorper
+            lacus,
           </p>
           <p className="wore">
             vel scelerisque lectus libero sit amet odio. Duis vel enim in erat
             vulputate
           </p>
-          <p className="wore">ultrices, nunc eu maximus tristique.</p>
+          <p className="wore">
+            tincidunt eu sed nisi. Aenean vehicula, dui at convallis laoreet.
+          </p>
           <br />
           <br />
-          <button className="dbt" onClick={() => handleButtonClick("Magazine")}>
-            LEARN MORE
-          </button>
         </div>
         <div>
-          <img className="departimage" src="/public/depart3.jpg" alt="" />
+          <img className="departimage" src="/public/depart1.jpg" alt="" />
         </div>
+      </div><br /><br /><br /><br />
+      <div className="slider">
+        {images.map((image, index) => (
+          <div
+            key={index}
+            className={`slide ${index === currentIndex ? "active" : ""}`}
+            style={{ backgroundImage: `url(${image.src})` }}
+          >
+            <div className="text">{image.text}</div>
+          </div>
+        ))}
       </div>
+      <br />
+      <br /> <br />
+      <br /><br /><br />
     </div>
   );
 }

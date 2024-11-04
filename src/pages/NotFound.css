@@ -1,0 +1,16 @@
+.notfound{
+    text-align: center;
+    padding: 280px;
+    background-color: rgba(52, 0, 63, 0.682);
+    border-radius: 900px 900px;
+}
+.t4{
+    font-size: 100px;
+    color: rgb(126, 0, 158);
+}
+.n4{
+    font-size: 40px;
+}
+.p4{
+    font-size: 25px;
+}

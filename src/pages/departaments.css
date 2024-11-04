@@ -19,20 +19,7 @@
 .departimage {
   height: 550px;
 }
-.dbt {
-  width: 200px;
-  height: 40px;
-  color: rgb(255, 255, 255);
-  border: 1px solid rgb(183, 183, 183);
-  border-radius: 10px;
-  background-color: #000000;
-  transition: all 0.3s;
-}
-.dbt:hover {
-  cursor: pointer;
-  color: white;
-  background-color: #2a93c9;
-}
+
 
 .departpage2 {
   display: flex;
@@ -51,17 +38,37 @@
 .departimage2 {
   height: 550px;
 }
-.dbt2 {
-  width: 200px;
-  height: 40px;
-  color: rgb(255, 255, 255);
-  border: 1px solid rgb(183, 183, 183);
-  border-radius: 10px;
-  background-color: #000000;
-  transition: all 0.3s;
+
+
+.slider {
+  position: relative;
+  width: 100%; /* Sliderning kengligi */
+  height: 600px; /* Sliderning balandligi */
+  overflow: hidden;
 }
-.dbt2:hover {
-  cursor: pointer;
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 0.5s ease; /* Chiqish va kirish animatsiyasi */
+}
+
+.slide.active {
+  opacity: 1; /* Faqat aktiv slide ko'rinadi */
+}
+
+.text {
+  position: absolute;
+  bottom: 10px; /* So'zlar uchun joylashuv */
+  left: 50%;
+  transform: translateX(-50%);
   color: white;
-  background-color: #2a93c9;
+  font-size: 24px; /* So'zlarning o'lchami */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); /* So'zlar uchun soyalar */
 }

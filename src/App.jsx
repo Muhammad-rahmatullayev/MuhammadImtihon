@@ -2,7 +2,8 @@ import "./App.css";
 import React, { useState } from "react";
 
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-
+import { DarkModeProvider } from "./DarkModeContext";
+import DarkModeSwitcher from "./DarkModeSwitcher";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Team from "./pages/team";
@@ -11,7 +12,9 @@ import Timetable from "./pages/timetable";
 import Contact from "./pages/Contact";
 import Appoint from "./pages/Appoint";
 import Magazine from "./pages/Magazine";
-
+import Statistic from "./pages/Statistic";
+import Sign from "./pages/Sign";
+import NotFound from "./pages/NotFound";
 function App() {
   const handleButtonClick = (page) => {
     window.location.href = `/${page}`;
@@ -22,39 +25,106 @@ function App() {
   const refreshPage = () => {
     window.location.reload();
   };
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
 
-  const [darkMode, setDarkMode] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isChecked, setIsChecked] = useState(false);
 
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
+  const handleRegister = () => {
+    if (email && password && isChecked) {
+      localStorage.setItem("user", JSON.stringify({ email, password }));
+      alert("Ma'lumotlar saqlandi!");
+      setIsModalOpen(false);
+
+      setEmail("");
+      setPassword("");
+      setIsChecked(false);
+    }
+  };
+
+  const [showCommentBox, setShowCommentBox] = useState(false);
+  const [comment, setComment] = useState("");
+  const [senderName, setSenderName] = useState("Anonymous");
+
+  const sendCommentToTelegram = async () => {
+    if (!comment) {
+      alert("Please write a comment before submitting");
+      return;
+    }
+
+    const botToken = "YOUR_TELEGRAM_BOT_TOKEN";
+    const chatId = "YOUR_CHAT_ID";
+    const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
+
+    const message = `Comment from ${senderName}:\n\n${comment}`;
+
+    try {
+      await fetch(telegramUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: message,
+        }),
+      });
+      alert("Comment sent successfully!");
+      setComment("");
+    } catch (error) {
+      console.error("Error sending comment:", error);
+      alert("Failed to send the comment.");
+    }
   };
 
   return (
-    <div className={darkMode ? "dark-mode" : "light-mode"}>
+    <div className="appp">
       <div className="container">
         <BrowserRouter>
           <nav className="navbar1">
             <div className="lgh">
               <img className="logo" src="/logo.png" alt="" />
               <h1>MEDICENE</h1>
-              <p>Diagnostic center</p>
+              <span style={{ color: "#c1d9d9" }}>enigmatic shadow</span>
             </div>
             <div className="op">
               <img className="opr" src="/operator.png" alt="" />
-              <span>+998(97)589-33-32</span>
+              <span style={{ color: "#d0d0d0" }}>+998(97)589-33-32</span>
               <br />
-              <span>+998(88)383-80-84</span>
+              <span style={{ color: "#d0d0d0" }}>+998(88)383-80-84</span>
             </div>
             <div className="email">
               <img className="em" src="/email.png" alt="" />
-              <span></span>
-              <a className="ema" href="shadowmgrp@gmail.com">
+              <a
+                className="ema"
+                style={{ color: "#d0d0d0" }}
+                href="shadowmgrp@gmail.com"
+              >
                 shadowmgrp@gmail.com
               </a>
             </div>
-            <button onClick={toggleDarkMode} className="toggle-button">
-              {darkMode ? "Light Mode" : "Dark Mode"}
-            </button>
+
+            <div>
+              <DarkModeProvider>
+                <div
+                  style={{
+                    padding: "0px",
+                    position: "relative",
+                    top: "-55px",
+                    width: "100px",
+                  }}
+                >
+                  <DarkModeSwitcher />
+                </div>
+              </DarkModeProvider>
+            </div>
           </nav>
           <nav className="Navbar">
             <ul className="menu">
@@ -70,12 +140,6 @@ function App() {
               <li>
                 <Link to="/departments">DEPARTMENTS</Link>
               </li>
-              <li>
-                <Link to="/timetable">TIMETABLE</Link>
-              </li>
-              <li>
-                <Link to="/Appoint">APPOINTMENTS</Link>
-              </li>
             </ul>
             <div className="website">
               <a href="https://www.youtube.com/">
@@ -87,14 +151,71 @@ function App() {
               <a href="https://t.me/rahmatullayev_channel">
                 <img className="tg" src="/tlg.png" alt="" />
               </a>
-              <Link to="/Magazine">
-                <img className="mag" src="/public/basket.png" alt="" />
-              </Link>
+              <a href="https://github.com/Muhammad-rahmatullayev/MEDICINE">
+                <img className="tg" src="/public/github.png" alt="" />
+              </a>
+            </div>
+
+            <div className="restr">
+              <div className="Ap">
+                <button onClick={() => setIsModalOpen(true)}>Sign In</button>
+
+                {isModalOpen && (
+                  <div className="modal">
+                    <div className="modal-content">
+                      <span
+                        className="close"
+                        onClick={() => setIsModalOpen(false)}
+                      >
+                        &times;
+                      </span>
+                      <h2>Registration</h2>
+                      <input
+                        className="emi"
+                        type="email"
+                        placeholder="Email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                      />{" "}
+                      <br />
+                      <br />
+                      <br />
+                      <input
+                        className="emi"
+                        type="password"
+                        placeholder="Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                      />{" "}
+                      <br /> <br />
+                      <label>
+                        <input
+                          type="checkbox"
+                          checked={isChecked}
+                          onChange={() => setIsChecked(!isChecked)}
+                        />
+                        Confirmation
+                      </label>{" "}
+                      <br />
+                      <br />
+                      <button
+                        onClick={handleRegister}
+                        disabled={!email || !password || !isChecked}
+                      >
+                        Sign In
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              <button onClick={() => handleButtonClick("Sign")}>Sign up</button>
             </div>
           </nav>
 
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="*" element={<NotFound />} />
             <Route path="/About" element={<About />} />
             <Route path="/team" element={<Team />} />
             <Route path="/departments" element={<Departments />} />
@@ -102,76 +223,77 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/Appoint" element={<Appoint />} />
             <Route path="/Magazine" element={<Magazine />} />
+            <Route path="/Statistic" element={<Statistic />} />
+            <Route path="/Sign" element={<Sign />} />
           </Routes>
         </BrowserRouter>
-
         <div className="boxes-container">
           <div className="box">
             <img src="/boxicon.png" alt="" className="icon" />
-            <h2>Opening Hours</h2>
-            <br />
+            <h3>Opening Hours</h3>
+
             <h4>Mon–Fri /// 8:00am–7:00pm</h4>
-            <br />
+
             <h4>Saturday /// 9:00am–5:00pm</h4>
-            <br />
+
             <h4>Sunday /// 9:00am–3:00pm</h4>
             <br />
             <button
               className="box-button"
-              onClick={() => handleButtonClick("timetable")}
+              onClick={() => handleButtonClick("Statistic")}
             >
-              View Timetable
+              STATISTICS
             </button>
           </div>
 
           <div className="box">
             <img src="/boxicon.png" alt="" className="icon" />
-            <h2>Doctors’ timetable</h2>
-            <br />
-            <p>The following is for guidance only to</p>
-            <p>help you plan your appointment with</p>
-            <p>a preferred doctor or nurse. It does</p>
-            <p>attending to other duties.</p>
+            <h3>Doctors’ timetable</h3>
+
+            <h4>The following is for guidance only to</h4>
+            <h4>help you plan your appointment with</h4>
+            <h4>a preferred doctor or nurse. It does</h4>
+            <h4>attending to other duties.</h4>
             <button
               className="box-button"
               onClick={() => handleButtonClick("timetable")}
             >
-              View Timetable
+              TIMETABLE
             </button>
           </div>
 
           <div className="box">
             <img src="/boxicon.png" alt="" className="icon" />
-            <h2>Appointments</h2>
-            <br />
-            <p>The first step towards a healthy life is</p>
-            <p>to schedule an appointment. Please</p>
-            <p>contact our office by phone or</p>
-            <p>form shadow.</p>
+            <h3>Appointments</h3>
+
+            <h4>The first step towards a healthy life is</h4>
+            <h4>to schedule an appointment. Please</h4>
+            <h4>contact our office by phone or</h4>
+            <h4>form shadow.</h4>
             <button
               className="box-button"
               onClick={() => handleButtonClick("Appoint")}
             >
-              Appoint
+              APPOINT
             </button>
           </div>
 
           <div className="box">
             <img src="/boxicon.png" alt="" className="icon" />
-            <h2>Emergency Cases</h2>
-            <br />
-            <h2>1-800-1234-567</h2>
-            <p>Please enter Username</p>
-            <p>Call us!</p>
+            <h3>Emergency Cases</h3>
+
+            <h3>1-800-1234-567</h3>
+            <h4>Please enter Username</h4>
+            <h4>Call us!</h4>
             <button
               className="box-button"
               onClick={() => handleButtonClick("contact")}
             >
-              Contact Page
+              NEWS
             </button>
           </div>
         </div>
-
+        <br />
         <div className="middle">
           <div className="middlepage">
             <h1>What Makes Us Different</h1>
@@ -203,7 +325,6 @@ function App() {
             </div>
           </div>
         </div>
-
         <div className="conta">
           <div className="secondpage">
             <div>
@@ -227,7 +348,6 @@ function App() {
             </div>
           </div>
         </div>
-
         <div className="focus">
           <div className="cube">
             <div className="face front">MEDICENE</div>
@@ -269,11 +389,50 @@ function App() {
             </button>
           </div>
         </div>
-
+        <br />
+        <br />
+        {/* KSMJDSJIDSSDJHDJ */}
+        <div className="mess">
+          <button onClick={() => setShowCommentBox(!showCommentBox)}>
+            {showCommentBox ? "Close Comments" : "Add Comment"}
+          </button>{" "}
+          <br />
+          <br />
+          {showCommentBox && (
+            <div style={{ marginTop: "10px" }}>
+              <input
+                className="messinput"
+                type="text"
+                placeholder="Your name"
+                value={senderName}
+                onChange={(e) => setSenderName(e.target.value)}
+                style={{ display: "block", marginBottom: "5px" }}
+              />{" "}
+              <br />
+              <textarea
+                className="messinputt"
+                placeholder="Write your comment here"
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+                rows="4"
+                cols="50"
+                style={{ display: "block", marginBottom: "5px" }}
+              />{" "}
+              <br />
+              <button onClick={sendCommentToTelegram}>Send Comment</button>
+            </div>
+          )}
+        </div>{" "}
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        {/* DHBDSHFBDSFHBDSFHSDFDSF */}
         <footer className="footer">
           <div className="footer-left">
             <div>
-              <h1 className="cn">MEDICENE</h1>
+              <h1 className="cn">MEDICINE</h1>
             </div>
             <div className="social-icons">
               <a href="https://www.youtube.com/">
@@ -285,8 +444,8 @@ function App() {
               <a href="https://t.me/rahmatullayev_channel">
                 <img className="tg" src="/tlg.png" alt="" />
               </a>
-              <a href="https://t.me/rahmatullayev_channel">
-                <img className="tg" src="/tw.png" alt="" />
+              <a href="https://github.com/Muhammad-rahmatullayev/MEDICINE">
+                <img className="tg" src="/public/github.png" alt="" />
               </a>
             </div>
             <p className="copy">
@@ -317,7 +476,24 @@ function App() {
             <p className="pl">stuff, delivered right to your inbox.</p>
 
             <input type="email" placeholder="Emailni kiriting" />
-            <button onClick={refreshPage}>SUBSCRIBE</button>
+            <button onClick={refreshPage}>RESTART</button>
+            <button
+              onClick={scrollToTop}
+              style={{
+                position: "fixed",
+                bottom: "20px",
+                right: "20px",
+                padding: "10px 15px",
+                fontSize: "16px",
+                backgroundColor: "#333",
+                color: "#fff",
+                border: "none",
+                borderRadius: "5px",
+                cursor: "pointer",
+              }}
+            >
+              ↑
+            </button>
           </div>
         </footer>
       </div>

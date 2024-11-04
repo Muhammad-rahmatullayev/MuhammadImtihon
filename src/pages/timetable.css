@@ -2,123 +2,52 @@
   margin: 0;
   padding: 0;
 }
-.menu-container {
-  display: flex;
-  justify-content: space-between;
-  background-color: #333;
-  padding: 10px;
+.doctor-schedule {
+  max-width: auto;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #f9f9f900;
+  box-shadow: 0 2px 8px rgba(238, 1, 255, 0.61);
 }
 
-.menu-item {
-  color: white;
-  padding: 10px 20px;
-  cursor: pointer;
-  font-size: 18px;
-  transition: background-color 0.3s ease;
-}
-
-.menu-item:hover {
-  background-color: #555;
-}
-
-.schedule-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 80px;
-  position: relative;
-  left: 170px;
-}
-
-.schedule-grid {
-  display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  gap: 1px;
-}
-
-.schedule-days {
-  display: contents;
-}
-
-.day-cell {
-  padding: 10px;
+h2 {
   text-align: center;
+  color: #ffffff;
+  font-size: 35px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  border: 1px solid #000000;
+  padding: 12px;
+  text-align: left;
+}
+
+th {
+  background-color: #79008c;
   color: white;
-  background-color: #8d0000;
-  font-weight: bold;
 }
 
-.hour-row {
-  display: contents;
+tr:nth-child(even) {
+  background-color: #4a4a4a;
 }
 
-.hour-cell {
-  background-color: #006d12;
-  text-align: right;
-  color: white;
-  padding: 10px;
-  font-weight: bold;
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
 }
 
-.time-slot {
-  background-color: #e1e1e1;
-  height: 50px;
-  border: 1px solid #a6a6a6;
+ul li {
+  margin-bottom: 5px;
 }
 
-.empty-cell {
-  background-color: transparent;
-}
-
-@media (max-width: 768px) {
-  .schedule-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  .day-cell,
-  .hour-cell {
-    font-size: 12px;
-  }
-
-  .time-slot {
-    height: 40px;
-  }
-}
-.respons1 {
-  width: 98px;
-  height: 316px;
-  background-color: red;
-  position: relative;
-  top: 40px;
-  right: 693px;
-}
-.shki {
-  border-radius: 55px;
-  width: 98px;
-}
-.respons2 {
-  width: 98px;
-  height: 264px;
-  background-color: rgb(0, 183, 6);
-  position: relative;
-  top: 410px;
-  right: 790px;
-}
-.respons3 {
-  width: 98px;
-  height: 264px;
-  background-color: rgb(0, 34, 255);
-  position: relative;
-  top: 40px;
-  right: 590px;
-}
-.respons4 {
-  width: 98px;
-  height: 264px;
-  background-color: rgb(242, 0, 255);
-  position: relative;
-  top: 410px;
-  right: 492px;
-}
 
 .doctor-registration-container {
   display: flex;
@@ -127,8 +56,8 @@
 }
 
 .doctor-card {
-  background-color: #4dc1ff4f;
-  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.456);
+  background-color: #00000000;
+  box-shadow: 0px 0px 15px rgba(234, 0, 255, 0.695);
   padding: 20px;
   border-radius: 10px;
   width: 300px;
@@ -156,12 +85,11 @@
   padding: 10px;
   margin-bottom: 10px;
   border-radius: 5px;
-  border: 1px solid #ccc;
 }
 
 .doctor-info button {
   padding: 10px;
-  background-color: #3a99ff;
+  background-color: #67007a;
   color: rgb(255, 255, 255);
   border: none;
   border-radius: 5px;
@@ -170,6 +98,17 @@
 }
 
 .doctor-info button:hover {
-  background-color: #000000;
+  background-color: #e600ff;
+  box-shadow: 0px 0px 15px rgb(234, 0, 255);
   color: white;
+}
+.iii{
+  background-color: #2c0033;
+  border-radius: 0px 900px;
+}
+.timetableinput{
+  background-color: #000000;
+  border: 0;
+  color: white;
+  box-shadow: 0px 0px 5px 2px rgb(84, 41, 84);
 }

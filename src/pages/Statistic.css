@@ -1,0 +1,44 @@
+  .dashboardcontainer{
+      font-family: Arial, sans-serif;
+      padding: 190px;
+      background-color: #f4f4f400;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .statistics {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    
+    .stat {
+      background-color: #000000;
+      box-shadow: 0px 0px 10px 5px rgb(88, 0, 98);
+      color: white;
+      padding: 20px;
+      border-radius: 10px;
+      flex: 1;
+      margin: 0 10px;
+    }
+    
+    .scale {
+      margin-top: 20px;
+    }
+    
+    .scale-bar {
+      display: flex;
+      height: 20px;
+      background-color: #828282;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    
+    .visitors {
+      background-color: #d400ff; 
+    }
+    
+    .leavers {
+      background-color: #560180; 
+    }
+    

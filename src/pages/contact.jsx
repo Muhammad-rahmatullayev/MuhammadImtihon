@@ -1,189 +1,119 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./contact.css";
-const Contact = () => {
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    message: "",
-  });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
+const initialNews = [
+  "A new vaccine has proven its effectiveness against COVID-19.New algorithms are being developed for early detection of diseases and optimization of treatment processes with the help of artificial intelligence. These technologies are proving particularly successful in detecting cancer and heart disease.",
+  "New technologies are being implemented in the healthcare sector.Telemedicine services are expanding during the pandemic. The options for remote healthcare for patients have increased, helping to make the healthcare system more efficient.",
+  "The use of artificial intelligence in medicine is expanding.Mental health issues have increased during the COVID-19 pandemic. Psychologists and health professionals are developing new approaches to combat stress, anxiety and depression.",
+  "New drug research published.New campaigns and programs are being implemented to encourage young people to lead a healthy lifestyle. These programs focus on nutrition, physical activity and mental health.",
+  "It is important to educate young people about a healthy lifestyle.A lot of research is being done on the relationship between food and health. New research is identifying foods associated with risk factors for diabetes and cardiovascular disease.",
+  "New statistics on heart disease are out.In 2024, heart diseases remain the most common diseases globally. Medical professionals are developing new strategies to maintain heart health.  ",
+  "Innovative solutions are being developed in medical care.Research on new drugs and their effects is constantly being updated. In the near future, new drugs are expected to bring innovation to the treatment of patients.",
+  "New advice on mental health.The use of immunotherapy and gene therapy to treat cancer is expanding. These methods are highly effective in destroying cancer cells.",
+  "Telemedicine has taken its place in healthcare.Innovations in the field of medicine, such as 3D printing and bioprinting, are playing an important role in increasing the possibilities of transplantation and treatment of the human body.",
+  "Innovations in the field of medicine, such as 3D printing and bioprinting, are playing an important role in increasing the possibilities of transplantation and treatment of the human body.",
+];
+function Contact() {
+  const [news, setNews] = useState(initialNews);
+  const [comments, setComments] = useState({});
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setNews((prevNews) => {
+        const newNews = [...prevNews];
+        newNews.push(newNews.shift());
+        localStorage.setItem("news", JSON.stringify(newNews));
+        return newNews;
+      });
+    }, 10000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const handleCommentChange = (index, comment) => {
+    setComments((prev) => ({
+      ...prev,
+      [index]: comment,
+    }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(formData);
-    alert("Form submitted!");
-    window.location.reload();
+  const handleCommentSubmit = (index) => {
+    const currentComments = comments[index] || "";
+    const updatedComments = currentComments + " " + comments[index];
+    handleCommentChange(index, updatedComments);
+    localStorage.setItem(
+      "comments",
+      JSON.stringify({ ...comments, [index]: updatedComments })
+    );
   };
+
   return (
     <div>
-      <div className="abcont">
-        <div>
-          <h1 className="wordabout">CONTACT</h1> <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <a className="wordhome" href="./Home.jsx">
-            HOME
-          </a>
-          <span className="wordab">Contact</span>
-        </div>
-      </div>
-
       <div>
-        <div className="registration-container">
-          <div className="registration-form">
-            <h1>Get In Touch</h1>
+        <div className="abcont">
+          <div>
+            <h1 className="wordabout">REGISTRATION</h1> <br />
             <br />
-            <p>
-              You can contact us any way that is convenient for you. We are
-              available 24/7 via fax or email. You can also use a quick contact
-              form below or visit our medical center personally.We would be
-              happy to answer your questions.
-            </p>
-            <form onSubmit={handleSubmit}>
-              <input
-                type="text"
-                name="firstName"
-                placeholder="First Name"
-                value={formData.firstName}
-                onChange={handleChange}
-                required
-              />
-              <input
-                type="text"
-                name="lastName"
-                placeholder="Last Name"
-                value={formData.lastName}
-                onChange={handleChange}
-                required
-              />
-              <input
-                type="email"
-                name="email"
-                placeholder="Email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-              />
-              <input
-                type="tel"
-                name="phone"
-                placeholder="Phone"
-                value={formData.phone}
-                onChange={handleChange}
-                required
-              />
-              <textarea
-                name="message"
-                placeholder="Your Message"
-                value={formData.message}
-                onChange={handleChange}
-                required
-              />
-              <button type="submit">Submit</button>
-            </form>
-          </div>
-
-          <div className="contact-info">
-            <h2>Our Websites</h2>
             <br />
-            <div className="website-links">
-              <a
-                href="https://www.youtube.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                YOUTUBE
-              </a>
-              <a
-                href="https://www.instagram.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                INSTAGRAM
-              </a>
-              <a
-                href="https://t.me/rahmatullayev_channel"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                TELEGRAM
-              </a>
-              <a
-                href="https://www.youtube.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                TWITTER
-              </a>
-              <br />
-              <br />
-            </div>
-            <p>Address: 37.7749° N, 122.4194° W</p>
-            <p>Phone Numbers: +1 234 567 8901, +1 234 567 8902</p>
-            <p>Email: contact@example.com</p>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio,
-              quas pariatur corporis, reprehenderit iste, officia similique
-              nihil id necessitatibus iure voluptatibus placeat? Necessitatibus
-              ipsa id perspiciatis debitis vitae distinctio, est corrupti
-              repudiandae. Animi accusantium assumenda tenetur dicta enim illo
-              suscipit harum laboriosam cum? Maiores sint quaerat rerum
-              consequatur voluptatum molestiae debitis odit repellat, quidem
-              optio vel soluta harum voluptas rem libero iste alias modi
-              inventore distinctio accusamus earum temporibus beatae?
-              Repellendus dolor dolore repudiandae aliquid, amet, non
-              perferendis quae laborum eveniet nulla corrupti itaque eaque
-              pariatur sapiente praesentium atque? Iure consectetur assumenda
-              dignissimos tempora voluptatibus totam nam labore in ipsam!
-              <br />
-              <br />
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio,
-              quas pariatur corporis, reprehenderit iste, officia similique
-              nihil id necessitatibus iure voluptatibus placeat? Necessitatibus
-              ipsa id perspiciatis debitis vitae distinctio, est corrupti
-              repudiandae. Animi accusantium assumenda tenetur dicta enim illo
-              suscipit harum laboriosam cum? Maiores sint quaerat rerum
-              consequatur voluptatum molestiae debitis odit repellat, quidem
-              optio vel soluta harum voluptas rem libero iste alias modi
-              inventore distinctio accusamus earum temporibus beatae?
-              Repellendus dolor dolore repudiandae aliquid, amet, non
-              perferendis quae laborum eveniet nulla corrupti itaque eaque
-              pariatur sapiente praesentium atque? Iure consectetur assumenda
-              dignissimos tempora voluptatibus totam nam labore in ipsam! Lorem
-              ipsum dolor sit amet, consectetur adipisicing elit. Odio, quas
-              pariatur corporis, reprehenderit iste, officia similique nihil id
-              necessitatibus iure voluptatibus placeat? Necessitatibus ipsa id
-              perspiciatis debitis vitae distinctio, est corrupti repudiandae.
-              Animi accusantium assumenda tenetur dicta enim illo suscipit harum
-              laboriosam cum? Maiores sint quaerat rerum consequatur voluptatum
-              molestiae debitis odit repellat, quidem optio vel soluta harum
-              voluptas rem libero iste alias modi inventore distinctio accusamus
-              earum temporibus beatae? Repellendus dolor dolore repudiandae
-              aliquid, amet, non perferendis quae laborum eveniet nulla corrupti
-              itaque eaque pariatur sapiente praesentium atque? Iure consectetur
-              assumenda dignissimos tempora voluptatibus totam nam labore in
-              ipsam!
-            </p>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <a className="wordhome" href="./Home.jsx">
+              HOME
+            </a>
+            <span className="wordab">REGISTRATION</span>
           </div>
         </div>
       </div>
+      <br />
+      <br />
+      <div style={{ padding: "20px" }}>
+        <h1>MEDICINE NEWS</h1>
+        <div>
+          {news.map((item, index) => (
+            <div
+              key={index}
+              style={{
+                marginBottom: "20px",
+                border: "1px solid rgb(86, 0, 103)",
+                padding: "20px",
+                borderRadius:'10px 0px 200px 0px'
+              }}
+            >
+              <h2 style={{color:'rgb(200, 200, 200)'}}>{item}</h2>
+              <br />
+              <br />
+              <br />
+              <br />
+              <input
+                className="comment"
+                type="text"
+                placeholder="Write the comment..."
+                value={comments[index] || ""}
+                onChange={(e) => handleCommentChange(index, e.target.value)}
+              />{" "}
+              <br /> <br />
+              <button onClick={() => handleCommentSubmit(index)}>
+                Leave a comment
+              </button>
+              <div>
+                <br />
+                <strong>COMMENTS:</strong> {comments[index] || "NO COMMENTS"}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <br />
+      <br />
     </div>
   );
-};
+}
 
 export default Contact;
